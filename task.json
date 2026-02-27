@@ -1,0 +1,146 @@
+{
+  "project": "automation-os-mvp",
+  "version": "0.1.0",
+  "tasks": [
+    {
+      "id": "T001",
+      "title": "建立最小目录与文档骨架",
+      "owner": "solo-founder",
+      "status": "DONE",
+      "deps": [],
+      "input": "工作区根目录",
+      "output": "automation-os/目录及核心文档",
+      "acceptance": [
+        "automation-os 目录存在",
+        "README.md、architecture.md、WORKFLOW.md、task.json、progress.txt 存在",
+        "可通过 ls 看到上述文件"
+      ]
+    },
+    {
+      "id": "T002",
+      "title": "定义任务池数据结构",
+      "owner": "solo-founder",
+      "status": "DONE",
+      "deps": ["T001"],
+      "input": "任务管理需求",
+      "output": "统一 task.json 结构",
+      "acceptance": [
+        "每个任务含 id/title/status/acceptance 字段",
+        "status 仅使用 TODO/DOING/VERIFY/DONE",
+        "task.json 可被 JSON 解析器成功解析"
+      ]
+    },
+    {
+      "id": "T003",
+      "title": "固化单任务闭环工作流",
+      "owner": "solo-founder",
+      "status": "DONE",
+      "deps": ["T001"],
+      "input": "执行过程约束",
+      "output": "WORKFLOW.md",
+      "acceptance": [
+        "清晰定义状态流转",
+        "包含进入/退出每个状态的条件",
+        "包含阻塞处理规则"
+      ]
+    },
+    {
+      "id": "T004",
+      "title": "首轮执行记录落盘",
+      "owner": "solo-founder",
+      "status": "DONE",
+      "deps": ["T001", "T002", "T003"],
+      "input": "本次初始化动作",
+      "output": "progress.txt 首轮记录",
+      "acceptance": [
+        "记录本轮目标、动作、结果",
+        "记录风险与下一步",
+        "带时间戳"
+      ]
+    },
+    {
+      "id": "T005",
+      "title": "补充运行入口说明",
+      "owner": "solo-founder",
+      "status": "DONE",
+      "deps": ["T001"],
+      "input": "使用者视角",
+      "output": "README.md",
+      "acceptance": [
+        "包含快速开始步骤",
+        "包含如何推进下一个任务",
+        "包含自检方式"
+      ]
+    },
+    {
+      "id": "T006",
+      "title": "添加自动化校验脚本（后续）",
+      "owner": "solo-founder",
+      "status": "TODO",
+      "deps": ["T002", "T003"],
+      "input": "task.json 与工作流规则",
+      "output": "scripts/check.sh",
+      "acceptance": [
+        "脚本可校验 JSON 合法性",
+        "脚本可校验必需文件存在",
+        "脚本返回码 0/非0 区分通过失败"
+      ]
+    },
+    {
+      "id": "T007",
+      "title": "建立每日推进节奏",
+      "owner": "solo-founder",
+      "status": "TODO",
+      "deps": ["T004"],
+      "input": "progress 记录机制",
+      "output": "固定日节奏模板",
+      "acceptance": [
+        "定义每日计划-执行-复盘模板",
+        "每天至少更新一次进度",
+        "可追溯前一日阻塞项"
+      ]
+    },
+    {
+      "id": "T008",
+      "title": "定义版本发布最小门禁",
+      "owner": "solo-founder",
+      "status": "TODO",
+      "deps": ["T003", "T006"],
+      "input": "质量与发布要求",
+      "output": "release checklist",
+      "acceptance": [
+        "至少包含功能验证、回归验证、变更说明",
+        "每次发布有版本号",
+        "发布后可回滚到前一版本"
+      ]
+    },
+    {
+      "id": "T009",
+      "title": "建立指标看板数据源",
+      "owner": "solo-founder",
+      "status": "TODO",
+      "deps": ["T007"],
+      "input": "历史任务和进度日志",
+      "output": "metrics.json",
+      "acceptance": [
+        "可统计任务完成率",
+        "可统计平均任务周期",
+        "可统计阻塞次数"
+      ]
+    },
+    {
+      "id": "T010",
+      "title": "接入 CI 执行基础校验",
+      "owner": "solo-founder",
+      "status": "TODO",
+      "deps": ["T006", "T008"],
+      "input": "本地 check 脚本",
+      "output": "CI 配置文件",
+      "acceptance": [
+        "push 时自动运行校验",
+        "失败时阻断合并",
+        "日志可追踪到具体失败项"
+      ]
+    }
+  ]
+}
