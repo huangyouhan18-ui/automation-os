@@ -28,6 +28,7 @@
 
 ### C. 记录层（Record Layer）
 - `progress.txt`：按轮次记录执行日志、阻塞、决策
+- `improvements.md`：按轮次记录系统改进项（IMPROVEMENT）与回写位置
 - Git commit：每个任务至少一条可追踪提交
 
 ### D. 入口层（Operator Layer）

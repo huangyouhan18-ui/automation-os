@@ -326,3 +326,25 @@
 
 下一步建议：
 - 在仓库侧完成 required status check 配置并触发一次失败用例演练；通过后将 T010 置为 `DONE`。
+
+[Round 18] 2026-02-28 11:12 CST (Asia/Shanghai)
+目标：推进 T011 的最小可交付步骤——建立改进项结构化日志载体并回写架构。
+
+执行记录：
+1) 新增 `improvements.md`，定义 IMPROVEMENT 记录模板（收益/影响范围/风险/回写位置/状态）。
+2) 写入首条改进项 `IMP-20260228-01`，将“每轮至少一条改进”固化为可追踪记录。
+3) 更新 `architecture.md` 记录层：加入 `improvements.md` 作为系统改进日志。
+4) 更新 `task.json`：将 T011 状态从 `TODO` 调整为 `DOING`。
+
+验证结果：
+- `bash scripts/check.sh`：通过。
+- 返回码：0。
+- 新增文件存在：`improvements.md`。
+- `task.json` 中 T011 状态：`DOING`。
+
+风险/待办：
+- T010 仍处于 `VERIFY`，其“阻断合并”依赖远端分支保护启用 required check。
+- T011 仍需把“每轮至少 1 条改进项”接入执行节奏并完成至少一次持续性验证。
+
+下一步建议：
+- 在 WORKFLOW.md 增加 DONE 后必须写入 `improvements.md` 的硬性步骤，并补一轮验证后将 T011 推进到 `VERIFY`。
