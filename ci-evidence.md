@@ -35,3 +35,10 @@
 - [ ] T010 验收通过（满足“失败时阻断合并”）
 - 当前状态：`VERIFY`
 - 备注：本地侧 CI 接入与日志追溯能力已具备；等待远端 required status check 启用与失败演练证据后再关闭 T010。
+
+## 7) 管理员最小回填清单（一次性）
+1. 在受保护分支启用：`Require status checks to pass before merging`
+2. 勾选 required check：`automation-os-check`
+3. 创建演练分支并制造一次可控失败（参考 `ci-drill.md`）
+4. 创建 PR，确认 `automation-os-check` 失败且 Merge 被阻断
+5. 回填本文件中的“待回填”项，并将第 2 节与第 6 节勾选为 `[x]`
