@@ -368,3 +368,23 @@
 
 下一步建议：
 - 执行 T011 验收演练：选取一个已完成任务补记改进项状态流转（PROPOSED->ADOPTED）并闭环证据，再将 T011 置为 `DONE`。
+
+
+[Round 20] 2026-02-28 11:24 CST (Asia/Shanghai)
+目标：完成 T011 验收演练收口——验证“improvements -> architecture/workflow/task/progress”链路并关闭任务。
+
+执行记录：
+1) 将 IMP-20260228-01 状态从 APPLIED 推进为 VERIFIED，完成一次真实状态流转。
+2) 复核 architecture.md / WORKFLOW.md / improvements.md 三处约束与记录的一致性。
+3) 更新 task.json：将 T011 状态从 VERIFY 调整为 DONE。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `python3 -m json.tool task.json >/dev/null`：通过。
+- T011 当前状态：DONE。
+
+风险/待办：
+- T010 仍处于 VERIFY，受限于远端 required status check 配置，尚未形成本地可验证“阻断合并”证据。
+
+下一步建议：
+- 推进 T010：补充一份“分支保护已启用”的验收证据模板（截图/设置导出占位），并明确完成口径后收口。

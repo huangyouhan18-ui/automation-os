@@ -22,4 +22,4 @@
 - 影响范围：docs
 - 风险：初期记录成本略有增加。
 - 回写位置：`architecture.md`（记录层）、`progress.txt`（本轮记录）
-- 状态：APPLIED
+- 状态：VERIFIED
