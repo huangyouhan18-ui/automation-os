@@ -502,3 +502,22 @@
 
 下一步建议：
 - 按 `ci-evidence.md` 回填远端截图/链接，并将第 2 节与第 6 节勾选完成；随后将 T010 调整为 `DONE`。
+
+[Round 27] 2026-02-28 11:57 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——标准化“失败阻断演练”流程，降低远端验收执行偏差。
+
+执行记录：
+1) 新增 `ci-drill.md`，固化从建分支、制造失败、发起 PR 到证据回填的最小演练闭环。
+2) 更新 `README.md` 目录与 CI 门禁章节，挂接 `ci-drill.md` 作为演练入口。
+3) 保持 `task.json` 中 T010 状态为 `VERIFY`（等待远端实际演练证据）。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `test -f ci-drill.md`：通过。
+- `grep -n "ci-drill.md" README.md`：命中。
+
+风险/待办：
+- 远端 required status check 与失败阻断截图/链接仍需仓库管理员实际回填。
+
+下一步建议：
+- 在远端按 `ci-drill.md` 完成一次失败阻断演练并回填 `ci-evidence.md`，满足后将 T010 置为 `DONE`。

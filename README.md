@@ -12,6 +12,7 @@
 - `daily-template.md`：每日“计划-执行-复盘”模板（T007）
 - `ci-evidence-template.md`：T010 远端分支保护验收证据模板
 - `ci-evidence.md`：T010 验收证据记录（持续回填）
+- `ci-drill.md`：T010 失败阻断演练 Runbook
 
 ## 如何运行（当前版本）
 当前版本是 **文档驱动 MVP**，无业务代码构建流程。
@@ -54,8 +55,8 @@ ls -1 automation-os
 这样当 `bash scripts/check.sh` 失败时，PR 将无法合并，且可在 Actions 日志中定位具体失败项。
 另外工作流会始终上传 `automation-os-check-log` artifact（`ci-check.log`），便于追溯失败细节。
 
-建议先用 `ci-evidence-template.md` 初始化，再将每轮证据回填到 `ci-evidence.md`，作为 T010 收口凭证。
+建议先用 `ci-evidence-template.md` 初始化，再按 `ci-drill.md` 完成一次失败阻断演练，最后将证据回填到 `ci-evidence.md` 作为 T010 收口凭证。
 
 ## 推荐下一步
-1. 将 `automation-os-check` 配置为 required status check，完成 T010 验收收口
-2. 开始 `T011`：建立架构自进化日志与回写机制
+1. 按 `ci-drill.md` 完成一次“故意失败 -> PR 阻断”演练并回填 `ci-evidence.md`
+2. 证据补齐后将 `T010` 从 `VERIFY` 调整为 `DONE`
