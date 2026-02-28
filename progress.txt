@@ -445,3 +445,21 @@
 
 下一步建议：
 - 在远端完成一次“故意失败 -> PR 阻断”演练，将截图/链接补入 `ci-evidence.md`，满足后把 T010 调整为 `DONE`。
+
+[Round 24] 2026-02-28 11:42 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——把 CI 基线校验纳入本地统一检查，避免工作流被静默改坏。
+
+执行记录：
+1) 更新 `scripts/check.sh`，新增“CI workflow baseline”校验段。
+2) 当 `.github/workflows/ci-check.yml` 存在时，强制检查：`push`/`pull_request` 触发、`bash scripts/check.sh` 执行步骤、`actions/upload-artifact@v4` 日志留存步骤。
+3) 若工作流文件不存在则输出跳过提示（兼容 T010 未启动阶段）。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- 新增校验输出：`[check] CI workflow baseline OK`。
+
+风险/待办：
+- “失败时阻断合并”仍依赖远端分支保护 required status check，当前仅完成本地可回归校验。
+
+下一步建议：
+- 在远端仓库按 `ci-evidence.md` 完成一次失败阻断演练并回填证据，满足后将 T010 置为 `DONE`。

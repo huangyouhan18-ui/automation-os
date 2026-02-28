@@ -139,4 +139,16 @@ for task_id in graph:
 print("[check] deps cycle OK")
 PY
 
+echo "[check] validating CI workflow baseline"
+CI_WORKFLOW="${ROOT_DIR}/.github/workflows/ci-check.yml"
+if [[ -f "${CI_WORKFLOW}" ]]; then
+  grep -qE '^\s*push:' "${CI_WORKFLOW}" || { echo "[check] ci-check.yml missing push trigger" >&2; exit 1; }
+  grep -qE '^\s*pull_request:' "${CI_WORKFLOW}" || { echo "[check] ci-check.yml missing pull_request trigger" >&2; exit 1; }
+  grep -q 'bash scripts/check.sh' "${CI_WORKFLOW}" || { echo "[check] ci-check.yml missing check.sh step" >&2; exit 1; }
+  grep -q 'actions/upload-artifact@v4' "${CI_WORKFLOW}" || { echo "[check] ci-check.yml missing upload-artifact step" >&2; exit 1; }
+  echo "[check] CI workflow baseline OK"
+else
+  echo "[check] CI workflow not found, skip (T010 not started yet)"
+fi
+
 echo "[check] all checks passed"
