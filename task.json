@@ -84,6 +84,7 @@
     },
     {
       "id": "T006",
+      "title": "添加自动化校验脚本",
       "owner": "solo-founder",
       "status": "DONE",
       "deps": [

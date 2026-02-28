@@ -50,4 +50,30 @@ if invalid:
 print("[check] task status enum OK")
 PY
 
+echo "[check] validating required task fields"
+python3 - "${ROOT_DIR}/task.json" <<'PY'
+import json
+import sys
+
+required = {"id", "title", "status", "acceptance"}
+path = sys.argv[1]
+
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+missing = []
+for task in data.get("tasks", []):
+    task_id = task.get("id", "<missing-id>")
+    for key in required:
+        if key not in task:
+            missing.append((task_id, key))
+
+if missing:
+    for task_id, key in missing:
+        print(f"[check] missing task field: {task_id} -> {key}", file=sys.stderr)
+    sys.exit(1)
+
+print("[check] required task fields OK")
+PY
+
 echo "[check] all checks passed"

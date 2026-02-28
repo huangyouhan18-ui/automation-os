@@ -113,3 +113,22 @@
 
 下一步建议：
 - 在下一轮基于 `daily-template.md` 产出首条当日真实记录，并据此评估是否可将 T007 置为 DONE。
+
+[Round 7] 2026-02-28 10:17 CST (Asia/Shanghai)
+目标：先完成并加固 T006（scripts/check.sh），同步 task.json/progress 状态一致性。
+
+执行记录：
+1) 增强 `scripts/check.sh`：新增 task 必填字段校验（`id/title/status/acceptance`）。
+2) 修正 `task.json`：为 T006 补齐缺失的 `title` 字段，确保与任务数据结构约束一致。
+3) 保持 T006 状态为 `DONE`，并记录本轮加固结果。
+
+验证结果：
+- 运行 `bash scripts/check.sh`：通过。
+- 返回码：0。
+- 新增校验输出：`required task fields OK`。
+
+风险/待办：
+- 仍未覆盖 deps 引用合法性校验（依赖任务 id 是否存在）。
+
+下一步建议：
+- 进入 T007 的下一个最小步骤：产出一条真实的每日记录并在 progress 中回链，支撑“每天至少更新一次进度”验收。
