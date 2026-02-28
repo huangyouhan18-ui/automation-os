@@ -103,7 +103,7 @@
       "id": "T007",
       "title": "建立每日推进节奏",
       "owner": "solo-founder",
-      "status": "DOING",
+      "status": "VERIFY",
       "deps": [
         "T004"
       ],
