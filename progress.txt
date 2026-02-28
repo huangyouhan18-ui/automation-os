@@ -388,3 +388,22 @@
 
 下一步建议：
 - 推进 T010：补充一份“分支保护已启用”的验收证据模板（截图/设置导出占位），并明确完成口径后收口。
+
+[Round 21] 2026-02-28 11:29 CST (Asia/Shanghai)
+目标：推进 T010 的最小收口步骤——补齐“失败时阻断合并”的可审计证据模板。
+
+执行记录：
+1) 新增 `ci-evidence-template.md`，固化 branch protection 配置项、失败阻断演练与证据附件字段。
+2) 更新 `README.md` 目录与 CI 门禁章节，挂接该模板作为 T010 验收凭证入口。
+3) 保持 T010 状态为 `VERIFY`，等待远端仓库实际配置与截图回填。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `test -f ci-evidence-template.md`：通过。
+- `grep -n "ci-evidence-template.md" README.md`：命中。
+
+风险/待办：
+- 远端 required status check 仍需仓库管理员实际启用并提供演练证据。
+
+下一步建议：
+- 按 `ci-evidence-template.md` 完成一次“故意失败 -> PR 被阻断”演练，证据回填后将 T010 置为 `DONE`。
