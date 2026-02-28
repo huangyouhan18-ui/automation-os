@@ -41,7 +41,17 @@ for marker in required_markers:
     if marker not in text:
         fail(f"ci-evidence.md missing section: {marker}")
 
-if status == "DONE" and re.search(r"待回填", text):
-    fail("T010 is DONE but ci-evidence.md still contains '待回填'")
+if status == "DONE":
+    if re.search(r"待回填", text):
+        fail("T010 is DONE but ci-evidence.md still contains '待回填'")
+
+    required_checked_markers = [
+        "- [x] 已启用 `Require status checks to pass before merging`",
+        "- [x] 已勾选 `automation-os-check`",
+        "- [x] T010 验收通过（满足“失败时阻断合并”）",
+    ]
+    for marker in required_checked_markers:
+        if marker not in text:
+            fail(f"T010 is DONE but missing checked marker: {marker}")
 
 print("[check] CI evidence consistency OK")
