@@ -55,3 +55,22 @@
 
 下一步建议：
 - 执行 T007，建立每日计划-执行-复盘节奏模板并固化更新频率。
+
+[Round 4] 2026-02-28 09:43 CST (Asia/Shanghai)
+目标：按要求先完成并复核 T006（scripts/check.sh），确认状态已同步。
+
+执行记录：
+1) 复核 scripts/check.sh 内容，确认包含必需文件检查与 task.json JSON 语法检查。
+2) 执行 `bash scripts/check.sh` 进行验证。
+3) 复核 task.json 中 T006 状态，确认为 DONE；记录本轮结果到 progress.txt。
+
+验证结果：
+- `bash scripts/check.sh` 输出 all checks passed。
+- 返回码：0。
+- task.json 中 T006 状态：DONE。
+
+风险/待办：
+- 当前校验仍未覆盖 task 状态枚举/依赖关系一致性（可在后续增强）。
+
+下一步建议：
+- 开始 T007：新增“每日计划-执行-复盘模板”，并在 README/WORKFLOW 中挂接使用方式。
