@@ -9,6 +9,7 @@
 - `task.json`：任务池（含验收标准）
 - `WORKFLOW.md`：单任务闭环规则
 - `progress.txt`：执行轮次记录
+- `daily-template.md`：每日“计划-执行-复盘”模板（T007）
 
 ## 如何运行（当前版本）
 当前版本是 **文档驱动 MVP**，无业务代码构建流程。
@@ -24,6 +25,7 @@
 
 3. 写入执行记录
    - 在 `progress.txt` 追加新轮次记录
+   - 每日按 `daily-template.md` 落一次“计划-执行-复盘”
 
 4. 提交版本
    - 完成后做一次 git commit，确保可追踪

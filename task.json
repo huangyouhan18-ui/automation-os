@@ -84,7 +84,6 @@
     },
     {
       "id": "T006",
-      
       "owner": "solo-founder",
       "status": "DONE",
       "deps": [
@@ -103,7 +102,7 @@
       "id": "T007",
       "title": "建立每日推进节奏",
       "owner": "solo-founder",
-      "status": "TODO",
+      "status": "DOING",
       "deps": [
         "T004"
       ],
