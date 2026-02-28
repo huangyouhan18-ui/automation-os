@@ -539,3 +539,21 @@
 
 下一步建议：
 - 按 `ci-drill.md` 在远端完成一次失败阻断演练并回填 `ci-evidence.md`，随后将 T010 置为 `DONE`。
+
+[Round 29] 2026-02-28 12:08 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——将外部依赖阻塞显式结构化，避免误判可关闭状态。
+
+执行记录：
+1) 更新 `task.json`：为 T010 新增 `blocker` 字段，明确当前阻塞来源为“远端 required checks + 失败阻断证据回填”。
+2) 保持 T010 状态为 `VERIFY`，不提前置为 `DONE`。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `python3 -m json.tool task.json >/dev/null`：通过。
+- `grep -n '"id": "T010"' -n task.json` 与后续字段检查：已包含 `blocker` 说明。
+
+风险/待办：
+- 外部前置仍未解除：需仓库管理员在远端仓库完成 required status check 配置与一次失败阻断演练证据回填。
+
+下一步建议：
+- 在远端按 `ci-drill.md` 执行演练并回填 `ci-evidence.md`，完成后再将 T010 改为 `DONE`。
