@@ -11,6 +11,7 @@
 - `progress.txt`：执行轮次记录
 - `daily-template.md`：每日“计划-执行-复盘”模板（T007）
 - `ci-evidence-template.md`：T010 远端分支保护验收证据模板
+- `ci-evidence.md`：T010 验收证据记录（持续回填）
 
 ## 如何运行（当前版本）
 当前版本是 **文档驱动 MVP**，无业务代码构建流程。
@@ -53,7 +54,7 @@ ls -1 automation-os
 这样当 `bash scripts/check.sh` 失败时，PR 将无法合并，且可在 Actions 日志中定位具体失败项。
 另外工作流会始终上传 `automation-os-check-log` artifact（`ci-check.log`），便于追溯失败细节。
 
-建议用 `ci-evidence-template.md` 记录配置截图与失败演练证据，作为 T010 收口凭证。
+建议先用 `ci-evidence-template.md` 初始化，再将每轮证据回填到 `ci-evidence.md`，作为 T010 收口凭证。
 
 ## 推荐下一步
 1. 将 `automation-os-check` 配置为 required status check，完成 T010 验收收口

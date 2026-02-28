@@ -426,3 +426,22 @@
 
 下一步建议：
 - 按 `ci-evidence-template.md` 完成一次远端“故意失败 -> PR 阻断”演练，证据回填后将 T010 置为 `DONE`。
+
+[Round 23] 2026-02-28 11:37 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——建立持续回填的验收证据记录文件。
+
+执行记录：
+1) 新增 `ci-evidence.md`，基于模板固化“本地可验证证据 + 远端待回填项”。
+2) 更新 `README.md` 目录与 CI 门禁说明，挂接 `ci-evidence.md` 作为持续回填入口。
+3) 保持 `task.json` 中 T010 状态为 `VERIFY`（等待远端 required status check 证据）。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `test -f ci-evidence.md`：通过。
+- `grep -n "ci-evidence.md" README.md`：命中。
+
+风险/待办：
+- 仍需远端仓库管理员完成 required status check 启用与失败阻断演练证据回填。
+
+下一步建议：
+- 在远端完成一次“故意失败 -> PR 阻断”演练，将截图/链接补入 `ci-evidence.md`，满足后把 T010 调整为 `DONE`。
