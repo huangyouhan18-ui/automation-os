@@ -6,6 +6,7 @@
 - 已在目标仓库开启分支保护规则。
 - 已勾选 required status check：`automation-os-check`。
 - 有权限创建分支与发起 PR。
+- 本地可执行一次失败冒烟：`bash scripts/smoke_ci_failure.sh`（确认失败检测链路有效）。
 
 ## 演练步骤（最小闭环）
 1. 新建演练分支（示例）
