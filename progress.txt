@@ -152,3 +152,22 @@
 
 下一步建议：
 - 下一轮做一个最小增强：在 `scripts/check.sh` 增加 deps 引用合法性校验；通过后将 T007 置为 DONE。
+
+[Round 9] 2026-02-28 10:30 CST (Asia/Shanghai)
+目标：完成一个最小可交付增强——补齐 deps 引用合法性校验，并收口 T007。
+
+执行记录：
+1) 增强 `scripts/check.sh`：新增 `deps` 引用合法性校验（依赖 id 必须存在于 task 列表中）。
+2) 运行 `bash scripts/check.sh` 执行全量校验。
+3) 更新 `task.json`：将 T007 状态从 `VERIFY` 调整为 `DONE`。
+
+验证结果：
+- `bash scripts/check.sh`：通过。
+- 返回码：0。
+- 新增校验输出：`deps references OK`。
+
+风险/待办：
+- 当前尚未校验任务依赖是否形成循环（环依赖检测未覆盖）。
+
+下一步建议：
+- 开始 T008：新增 release checklist（功能验证/回归验证/变更说明/版本号/回滚步骤）。

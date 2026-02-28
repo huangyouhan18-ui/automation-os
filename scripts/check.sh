@@ -76,4 +76,32 @@ if missing:
 print("[check] required task fields OK")
 PY
 
+echo "[check] validating deps references"
+python3 - "${ROOT_DIR}/task.json" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+tasks = data.get("tasks", [])
+ids = {task.get("id") for task in tasks}
+invalid = []
+
+for task in tasks:
+    task_id = task.get("id", "<missing-id>")
+    for dep in task.get("deps", []):
+        if dep not in ids:
+            invalid.append((task_id, dep))
+
+if invalid:
+    for task_id, dep in invalid:
+        print(f"[check] invalid dep reference: {task_id} -> {dep}", file=sys.stderr)
+    sys.exit(1)
+
+print("[check] deps references OK")
+PY
+
 echo "[check] all checks passed"
