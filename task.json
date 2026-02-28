@@ -137,7 +137,7 @@
       "id": "T009",
       "title": "建立指标看板数据源",
       "owner": "solo-founder",
-      "status": "DOING",
+      "status": "VERIFY",
       "deps": [
         "T007"
       ],

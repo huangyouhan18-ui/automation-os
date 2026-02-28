@@ -248,3 +248,24 @@
 
 下一步建议：
 - 在下一轮实现 `avg_task_cycle` 的最小可计算口径（基于 progress 轮次或任务状态变更记录），并将 T009 推进到 `VERIFY`。
+
+
+[Round 14] 2026-02-28 10:52 CST (Asia/Shanghai)
+目标：推进 T009 的最小可交付步骤——补齐平均任务周期统计口径并进入验收。
+
+执行记录：
+1) 更新 `metrics.json`：将 `cycle_time.avg_task_cycle` 从 `null` 调整为可计算值 `2.5`。
+2) 新增统计口径说明：基于 `progress.txt` 中“显式状态流转且已 DONE 任务”的轮次跨度均值（sample_size=2，当前样本 T007/T008）。
+3) 更新 `task.json`：将 T009 状态从 `DOING` 调整为 `VERIFY`。
+
+验证结果：
+- `python3 -m json.tool metrics.json >/dev/null`：通过。
+- `python3 -m json.tool task.json >/dev/null`：通过。
+- `bash scripts/check.sh`：通过（返回码 0）。
+
+风险/待办：
+- 当前平均周期样本量较小（2），后续需随任务推进自动扩样。
+- `blocked_count` 仍为关键字计数法，尚未结构化事件模型。
+
+下一步建议：
+- 完成 T009 验收收口：补一个最小生成脚本（从 task/progress 自动再生 metrics），然后将 T009 置为 DONE。

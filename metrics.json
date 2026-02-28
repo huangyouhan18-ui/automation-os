@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T10:47:00+08:00",
+  "generated_at": "2026-02-28T10:52:00+08:00",
   "source": "task.json + progress.txt",
   "summary": {
     "total_tasks": 11,
@@ -7,9 +7,11 @@
     "completion_rate": 0.7273
   },
   "cycle_time": {
-    "avg_task_cycle": null,
+    "avg_task_cycle": 2.5,
     "unit": "round",
-    "note": "T009 后续步骤将基于 progress.txt 计算平均任务周期"
+    "method": "mean(done_round - start_round + 1) from progress.txt explicit status transitions",
+    "sample_size": 2,
+    "note": "当前样本来自已在 progress 中记录完整状态流转并已 DONE 的任务（T007,T008）"
   },
   "blockers": {
     "blocked_count": 5,
