@@ -1,24 +1,26 @@
-# T010 验收证据记录（进行中）
+# T010 验收证据记录（已完成）
 
-> 基于 `ci-evidence-template.md` 的本轮回填。当前先沉淀“本地可验证证据”，远端分支保护证据待仓库管理员回填。
+> 基于 `ci-evidence-template.md` 的回填。已补齐远端分支保护与失败阻断证据。
 
 ## 1) 仓库与分支范围
-- 仓库：`automation-os`（本地工作区）
-- 受保护分支（例如 `main`）：待回填
-- 配置人：待回填
-- 配置时间（CST）：待回填
+- 仓库：`https://github.com/huangyouhan18-ui/automation-os`
+- 受保护分支：`main`
+- 配置人：`huangyouhan18-ui`（由 agent 执行配置）
+- 配置时间（CST）：2026-02-28 13:34
 
 ## 2) Required Status Check 配置
-请在 GitHub `Settings -> Branches -> Branch protection rules` 中确认：
-- [ ] 已启用 `Require status checks to pass before merging`
-- [ ] 已勾选 `automation-os-check`
-- [ ] （可选）已启用 `Require branches to be up to date before merging`
+GitHub `Settings -> Branches -> Branch protection rules` 已确认：
+- [x] 已启用 `Require status checks to pass before merging`
+- [x] 已勾选 `automation-os-check`
+- [x] 已勾选 required check：`check`（workflow: `automation-os-check`）
+- [x] 已启用 `Require branches to be up to date before merging`（strict=true）
 
 ## 3) 失败阻断演练
-- 演练分支：待回填
-- 演练方式（例如故意改坏 `task.json`）：待回填
-- 预期结果：`automation-os-check` 失败，PR 合并按钮被阻断
-- 实际结果：待回填
+- 演练分支：`ci-failure-drill`
+- 演练方式：故意破坏 `task.json`（追加非法文本）触发 CI 失败
+- 预期结果：`automation-os-check` 失败，PR 合并被阻断
+- 实际结果：满足预期（PR `mergeStateStatus=BLOCKED`，status check `check=FAILURE`）
+- 演练 PR：`https://github.com/huangyouhan18-ui/automation-os/pull/1`
 
 ## 4) 本地已验证证据（本轮新增）
 - CI 工作流文件存在：`.github/workflows/ci-check.yml`
@@ -27,18 +29,21 @@
 - 工作流日志留存：`actions/upload-artifact@v4` 上传 `automation-os-check-log`
 
 ## 5) 证据附件
-- Branch protection 配置截图路径/链接：待回填
-- Actions 失败日志截图路径/链接：待回填
-- PR 页面阻断截图路径/链接：待回填
+- Branch protection（API 回执）：已在配置步骤返回 required status checks=check
+- Actions 失败日志链接：
+  - https://github.com/huangyouhan18-ui/automation-os/actions/runs/22514391741/job/65229619306
+  - https://github.com/huangyouhan18-ui/automation-os/actions/runs/22514392266/job/65229620693
+- PR 阻断页面：
+  - https://github.com/huangyouhan18-ui/automation-os/pull/1
 
 ## 6) 结论
-- [ ] T010 验收通过（满足“失败时阻断合并”）
-- 当前状态：`VERIFY`
-- 备注：本地侧 CI 接入与日志追溯能力已具备；等待远端 required status check 启用与失败演练证据后再关闭 T010。
+- [x] T010 验收通过（满足“失败时阻断合并”）
+- 当前状态：`DONE`
+- 备注：本地与远端证据链均已补齐（push 触发、失败阻断、日志可追踪）。
 
 ## 7) 管理员最小回填清单（一次性）
 1. 在受保护分支启用：`Require status checks to pass before merging`
 2. 勾选 required check：`automation-os-check`
 3. 创建演练分支并制造一次可控失败（参考 `ci-drill.md`）
 4. 创建 PR，确认 `automation-os-check` 失败且 Merge 被阻断
-5. 回填本文件中的“待回填”项，并将第 2 节与第 6 节勾选为 `[x]`
+5. 已完成证据回填；第 2 节与第 6 节均已勾选为 `[x]`

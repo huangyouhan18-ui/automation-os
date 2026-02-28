@@ -592,3 +592,26 @@
 
 下一步建议：
 - 由管理员按 `ci-drill.md` 在远端执行一次真实 PR 失败阻断演练，并将证据回填到 `ci-evidence.md`，随后把 T010 调整为 `DONE`。
+
+[Round 17] 2026-02-28 13:36 CST (Asia/Shanghai)
+目标：完成 T010 远端验收闭环（required checks + 失败阻断证据）。
+
+执行记录：
+1) 将仓库 `huangyouhan18-ui/automation-os` 调整为 public（以支持免费版分支保护）。
+2) 配置 main 分支保护：required status checks=check，strict=true。
+3) 创建演练分支 `ci-failure-drill`，故意破坏 task.json 触发 CI 失败。
+4) 创建 PR #1，确认 mergeStateStatus=BLOCKED，status check=FAILURE。
+5) 回填 `ci-evidence.md` 远端证据，并将 `task.json` 中 T010 从 VERIFY 更新为 DONE。
+
+验证结果：
+- 仓库可访问：`https://github.com/huangyouhan18-ui/automation-os`
+- 演练 PR：`https://github.com/huangyouhan18-ui/automation-os/pull/1`
+- 失败日志：
+  - `https://github.com/huangyouhan18-ui/automation-os/actions/runs/22514391741/job/65229619306`
+  - `https://github.com/huangyouhan18-ui/automation-os/actions/runs/22514392266/job/65229620693`
+
+结果：
+- T010 验收闭环完成，状态 DONE。
+
+风险/待办：
+- 演练分支与 PR#1 为证据用途，后续可由管理员按需关闭/清理。

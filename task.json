@@ -153,7 +153,7 @@
       "id": "T010",
       "title": "接入 CI 执行基础校验",
       "owner": "solo-founder",
-      "status": "VERIFY",
+      "status": "DONE",
       "blocker": "等待仓库管理员在远端完成 required status checks 与失败阻断证据回填",
       "deps": [
         "T006",
