@@ -171,3 +171,22 @@
 
 下一步建议：
 - 开始 T008：新增 release checklist（功能验证/回归验证/变更说明/版本号/回滚步骤）。
+
+[Round 10] 2026-02-28 10:35 CST (Asia/Shanghai)
+目标：完成 T008 的最小可交付物——发布门禁清单落盘并收口状态。
+
+执行记录：
+1) 新增 `release-checklist.md`，覆盖功能验证、回归验证、变更说明、版本号与回滚步骤。
+2) 更新 `task.json`：将 T008 状态从 `TODO` 调整为 `DONE`。
+3) 追加本轮记录到 `progress.txt`。
+
+验证结果：
+- `bash scripts/check.sh`：通过。
+- 返回码：0。
+- 发布清单文件存在：`release-checklist.md`。
+
+风险/待办：
+- 当前回滚步骤为 Git 层面的最小策略，尚未形成业务数据回滚预案。
+
+下一步建议：
+- 开始 T009：新增 `metrics.json` 数据源并先实现任务完成率统计口径。

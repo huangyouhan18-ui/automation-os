@@ -119,7 +119,7 @@
       "id": "T008",
       "title": "定义版本发布最小门禁",
       "owner": "solo-founder",
-      "status": "TODO",
+      "status": "DONE",
       "deps": [
         "T003",
         "T006"
