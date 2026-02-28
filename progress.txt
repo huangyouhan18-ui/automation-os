@@ -269,3 +269,22 @@
 
 下一步建议：
 - 完成 T009 验收收口：补一个最小生成脚本（从 task/progress 自动再生 metrics），然后将 T009 置为 DONE。
+
+[Round 15] 2026-02-28 10:58 CST (Asia/Shanghai)
+目标：完成 T009 验收收口——提供可再生指标脚本并同步任务状态。
+
+执行记录：
+1) 新增 `scripts/generate_metrics.py`，从 `task.json` 与 `progress.txt` 自动生成 `metrics.json`。
+2) 执行 `./scripts/generate_metrics.py` 再生指标数据（完成率/平均任务周期/阻塞次数）。
+3) 更新 `task.json`：将 T009 状态从 `VERIFY` 调整为 `DONE`。
+
+验证结果：
+- `./scripts/generate_metrics.py`：执行成功并生成最新 `metrics.json`。
+- `python3 -m json.tool metrics.json >/dev/null`：通过。
+- `bash scripts/check.sh`：通过（返回码 0）。
+
+风险/待办：
+- 当前 `blocked_count` 仍为关键字计数，语义噪声较高（会统计“阻塞追踪”等非阻塞事件）。
+
+下一步建议：
+- 开始 T010：新增最小 CI 配置，在 push 时自动运行 `bash scripts/check.sh`。
