@@ -574,3 +574,21 @@
 
 下一步建议：
 - 由管理员按 `ci-drill.md` 完成一次远端失败阻断演练并回填 `ci-evidence.md`，满足后将 T010 置为 `DONE`。
+
+[Round 31] 2026-02-28 12:16 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——补一个“可控失败”本地冒烟脚本，降低远端演练前的误操作风险。
+
+执行记录：
+1) 新增 `scripts/smoke_ci_failure.sh`：在临时副本中故意注入非法状态并执行 `bash scripts/check.sh`。
+2) 脚本断言 `check.sh` 必须返回非 0，验证“失败可被可靠识别”。
+3) 不改动真实工作区数据（仅在 `mktemp` 临时目录演练，退出自动清理）。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `bash scripts/smoke_ci_failure.sh`：通过，输出 `PASS: check.sh failed as expected (rc=1)`，并命中 `invalid status` 报错。
+
+风险/待办：
+- T010 仍受限于远端 required status check 与 PR 阻断截图/链接回填；本轮仅补齐本地“失败可复现”证明。
+
+下一步建议：
+- 由管理员按 `ci-drill.md` 在远端执行一次真实 PR 失败阻断演练，并将证据回填到 `ci-evidence.md`，随后把 T010 调整为 `DONE`。
