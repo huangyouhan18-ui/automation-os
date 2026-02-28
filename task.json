@@ -86,7 +86,7 @@
       "id": "T006",
       "title": "添加自动化校验脚本（后续）",
       "owner": "solo-founder",
-      "status": "TODO",
+      "status": "DONE",
       "deps": [
         "T002",
         "T003"
