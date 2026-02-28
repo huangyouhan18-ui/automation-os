@@ -557,3 +557,20 @@
 
 下一步建议：
 - 在远端按 `ci-drill.md` 执行演练并回填 `ci-evidence.md`，完成后再将 T010 改为 `DONE`。
+
+[Round 30] 2026-02-28 12:12 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——把 `VERIFY` 阶段的 blocker 约束纳入自动校验，防止无阻塞说明的“悬空验收”。
+
+执行记录：
+1) 更新 `scripts/check_ci_evidence.py`：当 T010 状态为 `VERIFY` 时，强制要求 `task.json` 中 `T010.blocker` 非空。
+2) 保持 T010 状态为 `VERIFY`，不提前置为 `DONE`。
+
+验证结果：
+- `python3 scripts/check_ci_evidence.py`：通过。
+- `bash scripts/check.sh`：通过（返回码 0）。
+
+风险/待办：
+- 远端 required status check 与失败阻断证据仍待管理员回填，当前无法在本地闭合 T010。
+
+下一步建议：
+- 由管理员按 `ci-drill.md` 完成一次远端失败阻断演练并回填 `ci-evidence.md`，满足后将 T010 置为 `DONE`。

@@ -28,6 +28,11 @@ if status not in {"VERIFY", "DONE"}:
     print("[check] T010 not in VERIFY/DONE, skip CI evidence check")
     sys.exit(0)
 
+if status == "VERIFY":
+    blocker = str(t010.get("blocker", "")).strip()
+    if not blocker:
+        fail("T010 is VERIFY but blocker is missing")
+
 if not evidence_path.exists():
     fail("ci-evidence.md missing while T010 is VERIFY/DONE")
 
