@@ -51,6 +51,7 @@ ls -1 automation-os
 - 将状态检查 `automation-os-check` 设为 **required status check**
 
 这样当 `bash scripts/check.sh` 失败时，PR 将无法合并，且可在 Actions 日志中定位具体失败项。
+另外工作流会始终上传 `automation-os-check-log` artifact（`ci-check.log`），便于追溯失败细节。
 
 建议用 `ci-evidence-template.md` 记录配置截图与失败演练证据，作为 T010 收口凭证。
 

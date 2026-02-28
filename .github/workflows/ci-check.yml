@@ -19,4 +19,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run baseline checks
-        run: bash scripts/check.sh
+        run: |
+          set -o pipefail
+          bash scripts/check.sh | tee ci-check.log
+
+      - name: Upload check log (always)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-os-check-log
+          path: automation-os/ci-check.log
+          if-no-files-found: error

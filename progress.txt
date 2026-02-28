@@ -407,3 +407,22 @@
 
 下一步建议：
 - 按 `ci-evidence-template.md` 完成一次“故意失败 -> PR 被阻断”演练，证据回填后将 T010 置为 `DONE`。
+
+[Round 22] 2026-02-28 11:32 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——增强 CI 失败追溯能力，补齐可审计日志留存。
+
+执行记录：
+1) 更新 `.github/workflows/ci-check.yml`：`bash scripts/check.sh` 输出通过 `tee` 落盘为 `ci-check.log`。
+2) 在工作流新增 `actions/upload-artifact@v4` 步骤（`if: always()`），始终上传 `automation-os-check-log` artifact。
+3) 更新 `README.md` 的 CI 门禁章节，补充 artifact 追溯说明。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `python3 -m json.tool task.json >/dev/null`：通过。
+- `grep -n "upload-artifact\|ci-check.log" .github/workflows/ci-check.yml`：命中。
+
+风险/待办：
+- T010 仍受限于远端 required status check 的实际启用与失败演练证据回填。
+
+下一步建议：
+- 按 `ci-evidence-template.md` 完成一次远端“故意失败 -> PR 阻断”演练，证据回填后将 T010 置为 `DONE`。
