@@ -307,3 +307,22 @@
 
 下一步建议：
 - 在 README 补充“将 `automation-os-check` 设为 required status check”的最小配置说明，并将 T010 推进到 `VERIFY`。
+
+[Round 17] 2026-02-28 11:07 CST (Asia/Shanghai)
+目标：推进 T010 最小收口步骤——补齐“失败时阻断合并”的配置说明并进入验收。
+
+执行记录：
+1) 更新 `README.md`：新增“CI 合并门禁（T010）”章节，明确 `automation-os-check` 工作流与 branch protection 的 required check 配置路径。
+2) 更新 `task.json`：将 T010 状态从 `DOING` 调整为 `VERIFY`。
+3) 执行本地基线校验，确认变更未破坏现有约束。
+
+验证结果：
+- `bash scripts/check.sh`：通过。
+- 返回码：0。
+- `task.json` 中 T010 状态：`VERIFY`。
+
+风险/待办：
+- “阻断合并”仍依赖远端仓库管理员在 GitHub 设置中实际启用 required status check（本地无法代为完成）。
+
+下一步建议：
+- 在仓库侧完成 required status check 配置并触发一次失败用例演练；通过后将 T010 置为 `DONE`。

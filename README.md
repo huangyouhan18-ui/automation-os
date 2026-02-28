@@ -42,7 +42,15 @@ ls -1 automation-os
 - 当前项目为流程骨架，无代码构建目标，因此 `lint/build` 暂无可执行对象。
 - 后续可在 T006 引入脚本化检查与 lint 规则。
 
+## CI 合并门禁（T010）
+已接入 GitHub Actions 工作流：`.github/workflows/ci-check.yml`（job 名：`automation-os-check`）。
+
+为满足“失败时阻断合并”，请在仓库设置中开启：
+- `Settings -> Branches -> Branch protection rules`
+- 将状态检查 `automation-os-check` 设为 **required status check**
+
+这样当 `bash scripts/check.sh` 失败时，PR 将无法合并，且可在 Actions 日志中定位具体失败项。
+
 ## 推荐下一步
-1. 完成 `T006`：写 `scripts/check.sh` 固化自检
-2. 完成 `T008`：定义发布最小门禁
-3. 完成 `T010`：接入 CI 自动校验
+1. 将 `automation-os-check` 配置为 required status check，完成 T010 验收收口
+2. 开始 `T011`：建立架构自进化日志与回写机制
