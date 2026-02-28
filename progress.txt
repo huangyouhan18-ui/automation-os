@@ -348,3 +348,23 @@
 
 下一步建议：
 - 在 WORKFLOW.md 增加 DONE 后必须写入 `improvements.md` 的硬性步骤，并补一轮验证后将 T011 推进到 `VERIFY`。
+
+[Round 19] 2026-02-28 11:18 CST (Asia/Shanghai)
+目标：推进 T011 的最小可交付步骤——将“改进项落盘”硬编码进工作流并进入验收。
+
+执行记录：
+1) 更新 `WORKFLOW.md` 第 6 节：明确 DONE 后必须先写入 `improvements.md`，并要求记录改进项状态与 ID。
+2) 强化回写约束：可复用改进必须同步 `architecture.md` 与 `task.json`，并在 `progress.txt` 记录“系统进化内容 + 改进项ID”。
+3) 更新 `task.json`：将 T011 状态从 `DOING` 调整为 `VERIFY`。
+
+验证结果：
+- `python3 -m json.tool task.json >/dev/null`：通过。
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `grep -n "improvements.md\|改进项ID" WORKFLOW.md`：命中新增约束。
+
+风险/待办：
+- T010 仍处于 `VERIFY`，其“阻断合并”依赖远端 required status check 实际启用。
+- T011 需在下一轮以一次真实 DONE 任务演练，验证“improvements.md -> architecture/task/progress”链路稳定。
+
+下一步建议：
+- 执行 T011 验收演练：选取一个已完成任务补记改进项状态流转（PROPOSED->ADOPTED）并闭环证据，再将 T011 置为 `DONE`。

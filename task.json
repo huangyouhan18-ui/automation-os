@@ -170,7 +170,7 @@
       "id": "T011",
       "title": "建立架构自进化日志与回写机制",
       "owner": "solo-founder",
-      "status": "DOING",
+      "status": "VERIFY",
       "deps": [
         "T004",
         "T007"
