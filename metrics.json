@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-28T10:37:00+08:00",
+  "generated_at": "2026-02-28T10:47:00+08:00",
   "source": "task.json + progress.txt",
   "summary": {
     "total_tasks": 11,
@@ -12,7 +12,8 @@
     "note": "T009 后续步骤将基于 progress.txt 计算平均任务周期"
   },
   "blockers": {
-    "blocked_count": null,
-    "note": "T009 后续步骤将从 progress.txt 解析阻塞次数"
+    "blocked_count": 5,
+    "method": "count(keyword=阻塞) from progress.txt",
+    "note": "当前按关键字粗略统计，后续可升级为结构化阻塞事件计数"
   }
 }

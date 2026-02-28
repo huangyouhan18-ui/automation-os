@@ -228,3 +228,23 @@
 
 下一步建议：
 - 继续 T009：在 `metrics.json` 增加 `avg_task_cycle` 与 `blocked_count` 的最小可计算口径。
+
+[Round 13] 2026-02-28 10:47 CST (Asia/Shanghai)
+目标：推进 T009 的最小可交付步骤——补齐阻塞次数统计口径。
+
+执行记录：
+1) 更新 `metrics.json`：将 `blockers.blocked_count` 从 `null` 调整为可计算值。
+2) 采用 `progress.txt` 关键字计数法，统计 `阻塞` 出现次数并写入 `blocked_count=5`。
+3) 保持 `task.json` 中 T009 状态为 `DOING`（平均任务周期尚未补齐）。
+
+验证结果：
+- `python3 -m json.tool metrics.json >/dev/null`：通过。
+- `bash scripts/check.sh`：通过。
+- `metrics.json` 已包含阻塞次数统计：`blocked_count=5`。
+
+风险/待办：
+- 当前阻塞次数为关键字粗略统计，尚未结构化定义“阻塞事件”。
+- `avg_task_cycle` 仍为 `null`，T009 未完成。
+
+下一步建议：
+- 在下一轮实现 `avg_task_cycle` 的最小可计算口径（基于 progress 轮次或任务状态变更记录），并将 T009 推进到 `VERIFY`。
