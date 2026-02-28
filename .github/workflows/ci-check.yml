@@ -11,9 +11,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: automation-os
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -28,5 +25,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: automation-os-check-log
-          path: automation-os/ci-check.log
+          path: ci-check.log
           if-no-files-found: error
