@@ -24,4 +24,30 @@ done
 echo "[check] validating task.json syntax"
 python3 -m json.tool "${ROOT_DIR}/task.json" >/dev/null
 
+echo "[check] validating task status enum"
+python3 - "${ROOT_DIR}/task.json" <<'PY'
+import json
+import sys
+
+allowed = {"TODO", "DOING", "VERIFY", "DONE"}
+path = sys.argv[1]
+
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+invalid = []
+for task in data.get("tasks", []):
+    status = task.get("status")
+    task_id = task.get("id", "<missing-id>")
+    if status not in allowed:
+        invalid.append((task_id, status))
+
+if invalid:
+    for task_id, status in invalid:
+        print(f"[check] invalid status: {task_id} -> {status}", file=sys.stderr)
+    sys.exit(1)
+
+print("[check] task status enum OK")
+PY
+
 echo "[check] all checks passed"
