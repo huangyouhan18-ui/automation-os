@@ -209,3 +209,22 @@
 
 下一步建议：
 - 在 T009 下一轮补齐 `avg_task_cycle` 与 `blocked_count` 的解析逻辑，并将状态推进至 `VERIFY`。
+
+[Round 12] 2026-02-28 10:42 CST (Asia/Shanghai)
+目标：按边界先完成 T006 的最小增强——补齐依赖环检测并同步状态定义。
+
+执行记录：
+1) 增强 `scripts/check.sh`：新增 `deps` 循环依赖检测，发现环则返回非 0 并报错。
+2) 更新 `task.json`：在 T006 验收标准中补充“脚本可校验任务依赖无循环”，与当前脚本能力对齐。
+3) 执行 `bash scripts/check.sh` 完成回归验证。
+
+验证结果：
+- `bash scripts/check.sh`：通过。
+- 返回码：0。
+- 新增校验输出：`deps cycle OK`。
+
+风险/待办：
+- 当前未校验任务 `id` 唯一性；若未来出现重复 id，可能导致依赖图分析失真。
+
+下一步建议：
+- 继续 T009：在 `metrics.json` 增加 `avg_task_cycle` 与 `blocked_count` 的最小可计算口径。

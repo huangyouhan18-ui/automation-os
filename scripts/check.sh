@@ -104,4 +104,39 @@ if invalid:
 print("[check] deps references OK")
 PY
 
+echo "[check] validating deps cycle"
+python3 - "${ROOT_DIR}/task.json" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+
+with open(path, "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+graph = {task.get("id"): task.get("deps", []) for task in data.get("tasks", []) if task.get("id")}
+visited = set()
+stack = set()
+
+def has_cycle(node):
+    if node in stack:
+        return True
+    if node in visited:
+        return False
+    visited.add(node)
+    stack.add(node)
+    for dep in graph.get(node, []):
+        if dep in graph and has_cycle(dep):
+            return True
+    stack.remove(node)
+    return False
+
+for task_id in graph:
+    if has_cycle(task_id):
+        print(f"[check] deps cycle detected at: {task_id}", file=sys.stderr)
+        sys.exit(1)
+
+print("[check] deps cycle OK")
+PY
+
 echo "[check] all checks passed"
