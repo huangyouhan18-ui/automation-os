@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-02-28T10:37:00+08:00",
+  "source": "task.json + progress.txt",
+  "summary": {
+    "total_tasks": 11,
+    "done_tasks": 8,
+    "completion_rate": 0.7273
+  },
+  "cycle_time": {
+    "avg_task_cycle": null,
+    "unit": "round",
+    "note": "T009 后续步骤将基于 progress.txt 计算平均任务周期"
+  },
+  "blockers": {
+    "blocked_count": null,
+    "note": "T009 后续步骤将从 progress.txt 解析阻塞次数"
+  }
+}
