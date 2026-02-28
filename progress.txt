@@ -463,3 +463,21 @@
 
 下一步建议：
 - 在远端仓库按 `ci-evidence.md` 完成一次失败阻断演练并回填证据，满足后将 T010 置为 `DONE`。
+
+[Round 25] 2026-02-28 11:47 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——增加 CI 验收证据与任务状态一致性校验，避免误关单。
+
+执行记录：
+1) 新增 `scripts/check_ci_evidence.py`：当 T010 处于 `VERIFY/DONE` 时，强制校验 `ci-evidence.md` 存在且包含关键章节。
+2) 规则加固：若 T010 为 `DONE` 且证据中仍含“待回填”，校验直接失败，防止未完成远端证据即误标 DONE。
+3) 更新 `scripts/check.sh`，将上述脚本纳入统一检查链路。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- 新增校验输出：`[check] CI evidence consistency OK`。
+
+风险/待办：
+- T010 仍需远端分支保护 required status check 的实际启用与失败阻断演练证据回填。
+
+下一步建议：
+- 在远端完成一次“故意失败 -> PR 阻断”演练并回填 `ci-evidence.md`；证据补齐后可将 T010 调整为 `DONE`。

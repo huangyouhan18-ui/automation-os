@@ -151,4 +151,7 @@ else
   echo "[check] CI workflow not found, skip (T010 not started yet)"
 fi
 
+echo "[check] validating CI evidence consistency"
+python3 "${ROOT_DIR}/scripts/check_ci_evidence.py"
+
 echo "[check] all checks passed"
