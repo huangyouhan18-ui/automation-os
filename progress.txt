@@ -288,3 +288,22 @@
 
 下一步建议：
 - 开始 T010：新增最小 CI 配置，在 push 时自动运行 `bash scripts/check.sh`。
+
+[Round 16] 2026-02-28 11:03 CST (Asia/Shanghai)
+目标：推进 T010 的最小可交付步骤——新增 CI 工作流并接入基础校验脚本。
+
+执行记录：
+1) 新增 `.github/workflows/ci-check.yml`，配置在 `push`/`pull_request` 触发。
+2) 在工作流中使用 `actions/checkout@v4` 并执行 `bash scripts/check.sh`。
+3) 更新 `task.json`：将 T010 状态从 `TODO` 调整为 `DOING`。
+
+验证结果：
+- `bash scripts/check.sh`：通过（返回码 0）。
+- `test -f .github/workflows/ci-check.yml`：通过。
+- `grep` 命中触发与命令：`on/push/pull_request/bash scripts/check.sh`。
+
+风险/待办：
+- “失败时阻断合并”依赖仓库分支保护规则（需将该 CI 检查设为 required）。
+
+下一步建议：
+- 在 README 补充“将 `automation-os-check` 设为 required status check”的最小配置说明，并将 T010 推进到 `VERIFY`。
